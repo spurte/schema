@@ -1,16 +1,25 @@
 open module DyteCommon
 
+class DyteServer {
+
+}
+
+typealias DyteMode = "development" | "production"
+
 /// The root of the dyte project. Defaults to the current working directory
 root: String?
 
 /// The base url of the dyte project.
-base: String(startsWith("/")) = "/"
+base: String?(startsWith("/")) = "/"
 
 /// The public directory to use for serving public assets. Defaults to `public/`
-publicDir: String(endsWith("/")) = "public/"
+publicDir: String?(endsWith("/")) = "public/"
 
 /// The base url to serve public assets at. Defaults to `/`
-publicRoot: String(startsWith("/")) = "/"
+publicRoot: String?(startsWith("/")) = "/"
 
+/// Explicitly set the mode and overwrite the default mode or mode passed via the command line.
+mode: DyteMode?
 
-mode: "development" | "production"
+/// The list of plugins provided for this project, either as a file path or as a package uri
+plugins: Listing<String>? = new Listing {}
