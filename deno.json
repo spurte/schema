@@ -1,5 +1,5 @@
 {
   "tasks": {
-    "gen": "pkl eval gen.pkl"
+    "gen": "deno run -A scripts/schemas.js"
   }
 }
