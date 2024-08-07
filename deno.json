@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "gen": "pkl eval gen.pkl"
+  }
+}

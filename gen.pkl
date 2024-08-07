@@ -1,0 +1,7 @@
+import "package://pkg.pkl-lang.org/pkl-pantry/org.openapis.v3.contrib@1.0.3#/SchemaGenerator.pkl"
+
+import "src/dart.pkl"
+import "src/js.pkl"
+
+jsOutput = SchemaGenerator.generate(DyteJS).output;
+dartOutput = SchemaGenerator.generate(DyteDart).output;
