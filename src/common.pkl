@@ -1,10 +1,82 @@
-open module DyteCommon
+// Copyright (C) 2024 - The Dyte Authors
+// 
+// The code provided, as well as usage of this code is licensed under the MIT License
+//
+// For more information, check the LICENSE file at the root of this project, or check https://github.com/nikeokoronkwo/dyte for more information
 
-class DyteServer {
-
-}
+/// The Common Dyte Options, shared between both the JavaScript/TypeScript (Deno) and the Dart implementation of Dyte.
+open module DyteCommonOptions
 
 typealias DyteMode = "development" | "production"
+typealias DyteLogLevel = "debug" | "info" | "warn" | "error" | "none"
+typealias PackageManager = "npm" | "pnpm" | "yarn" | "bun"
+
+class DyteServerHttpsOptions {
+  /// The path to the https certificate used for creating the https server
+  cert: String?
+
+  /// The path to the https key used for creating the https server
+  key: String?
+}
+
+class DyteDevOptions {
+  /// Whether to bundle external dependencies or import them as-is.
+  /// 
+  /// Defaults to true, meaning url dependencies are bundled.
+  bundleJSDeps: Boolean?
+
+  /// Whether to initiate a full reload upon receiving changes
+  /// 
+  /// Defaults to false
+  fullReload: Boolean?
+}
+
+open class DyteBuildOptions {
+  /// The output directory for the build files
+  /// 
+  /// Defaults to the `dist/` directory
+  outdir: String?
+
+  /// Whether to minify output
+  /// 
+  /// Defaults to `true`
+  minify: Boolean?
+}
+
+open class DyteExperimentalOptions {}
+
+/// Shared options for using js or ts in Dyte
+///
+/// This class is not meant to be used in the common options, but to be implemented and used in the separate implementations
+open class DyteJSSharedOptions {
+  /// Whether to make use of a `node_modules` directory
+  nodeModulesDir: Boolean?
+
+  /// The package manager used to install the node modules, if any.
+  ///
+  /// If implemented in JS, this defaults to undefined - meaning none will be used for installing dependencies, and Deno will be used to cache the npm dependencies
+  /// Else this defaults to "npm"
+  /// 
+  /// if `nodeModulesDir` is undefined or false, this option is ignored.
+  packageManager: PackageManager?
+
+  /// The CDN to use to cache NPM dependencies during development.
+  /// Defaults to undefined for Dyte's own NPM dependency management.
+  ///
+  /// if `nodeModulesDir` is true, this option is ignored
+  cdn: String?(beginsWith("https"));
+}
+
+class DyteServerOptions {
+  /// The server port number. Defaults to 8000
+  port: Int?(isBetween(0, 9999))
+
+  /// The server hostname. Defaults to "localhost"
+  host: String?
+
+  /// HTTPS information that, when provided, can be used for creating a https server
+  https: DyteServerHttpsOptions?
+}
 
 /// The root of the dyte project. Defaults to the current working directory
 root: String?
@@ -22,4 +94,33 @@ publicRoot: String?(startsWith("/")) = "/"
 mode: DyteMode?
 
 /// The list of plugins provided for this project, either as a file path or as a package uri
-plugins: Listing<String>? = new Listing {}
+plugins: Listing<String>?
+
+/// Development options, used for customizing development as well as for other dev options.
+dev: DyteDevOptions? = new DyteDevOptions {
+  bundleJSDeps = true
+  fullReload = false
+}
+
+/// Options for customizing building the project
+build: DyteBuildOptions? = new DyteBuildOptions {
+  outdir = "dist"
+  minify = true
+}
+
+/// Configure the server options for Dyte's development server
+server: DyteServerOptions? = new DyteServerOptions {
+  port = 8000
+  host = "localhost"
+}
+
+/// The logging level for the dyte server
+logLevel: DyteLogLevel? = "none"
+
+/// Whether hot module replacement is active on the given project
+///
+/// Defaults to true
+hmr: Boolean? = true
+
+/// Experimental options
+experimental: DyteExperimentalOptions?
