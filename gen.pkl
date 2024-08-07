@@ -4,10 +4,10 @@ import "./src/common.pkl"
 import "./src/js.pkl"
 import "./src/dart.pkl"
 
-commonOutput = SchemaGenerator.generate(common).output;
-jsOutput = SchemaGenerator.generate(js).output;
-dartOutput = SchemaGenerator.generate(dart).output;
+local commonOutput = SchemaGenerator.generate(common).output;
+local jsOutput = SchemaGenerator.generate(js).output;
+local dartOutput = SchemaGenerator.generate(dart).output;
 
-outputType = read?("prop:type")
+local outputType = read?("prop:type")
 
 output = if (outputType == "js") jsOutput else (if (outputType == "dart") dartOutput else commonOutput )
