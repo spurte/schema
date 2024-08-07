@@ -1,3 +1,6 @@
 module DyteJS
 
 extends "common.pkl"
+
+/// The path to the deno configuration file, or equivalent JSON file used
+denoConfig: String?

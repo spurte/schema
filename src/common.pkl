@@ -1,1 +1,16 @@
 open module DyteCommon
+
+/// The root of the dyte project. Defaults to the current working directory
+root: String?
+
+/// The base url of the dyte project.
+base: String(startsWith("/")) = "/"
+
+/// The public directory to use for serving public assets. Defaults to `public/`
+publicDir: String(endsWith("/")) = "public/"
+
+/// The base url to serve public assets at. Defaults to `/`
+publicRoot: String(startsWith("/")) = "/"
+
+
+mode: "development" | "production"

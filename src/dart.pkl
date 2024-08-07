@@ -1,3 +1,9 @@
 module DyteDart
 
 extends "common.pkl"
+
+/// The main entrypoint of the application
+entry: String = "web/main.dart"
+
+/// The path to the pub
+pubspec: String?
