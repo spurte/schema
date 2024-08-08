@@ -1,0 +1,26 @@
+open module DytePlugin
+
+/// The name of the given plugin
+name: String
+
+/// Indicates whether the plugin is enabled
+enabled: Boolean? = true
+
+/// Indicates what kind of imports should be loaded by the given plugin, and provides an id for them
+resolve: Function1?
+
+/// Indicates the source code to be loaded for the given resource, and at which path it should be loaded at.
+/// This defaults to the source code loaded as is to the given path.
+load: Function2?
+
+/// Hook function to be run before the plugin is loaded
+setup: Function1?
+
+/// Hook function to be run after the plugin is loaded
+teardown: Function1?
+
+/// Hook function to be run before a file is loaded (i.e before the `load` function is loaded)
+beforeLoad: Function1?
+
+/// Hook function to be run after a file is loaded (i.e after the `load` function is loaded)
+afterLoad: Function1?

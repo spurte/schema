@@ -1,0 +1,5 @@
+module DyteJSPlugin
+
+extends "common.pkl"
+
+import "common.pkl"
