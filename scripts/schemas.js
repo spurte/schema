@@ -5,7 +5,7 @@ const values = ["js", "dart", null];
 const formats = ["json", "yaml"];
 
 const cmdname = "pkl";
-let commonargs = ["eval", "gen.pkl"];
+const commonargs = ["eval", "gen.pkl"];
 
 console.log("Begin generating config...\n");
 
