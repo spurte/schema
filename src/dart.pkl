@@ -1,35 +1,54 @@
-// Copyright (C) 2024 - The Dyte Authors
+// Copyright (C) 2024 - The Spurte Authors
 // 
 // The code provided, as well as usage of this code is licensed under the MIT License
 //
-// For more information, check the LICENSE file at the root of this project, or check https://github.com/nikeokoronkwo/dyte for more information
+// For more information, check the LICENSE file at the root of this project, or check https://github.com/nikeokoronkwo/spurte for more information
 
-/// The configuration options for the Dyte Dart implementation.
+/// The configuration options for the Spurte Dart implementation.
 /// 
 /// This extends the common options, with implementation-specific options.
-module DyteDartOptions
+module SpurteDartOptions
 
 extends "common.pkl"
 
 import "common.pkl"
 
-class DyteDartBuildOptions extends DyteBuildOptions {
+class SpurteDartWasmOptions {
+    /// The file that includes the import object
+    ///
+    /// The import object here should be provided as a default export from the given file.
+    /// Support for using dart to export such import object is not yet implemented
+    importFile: String?
+
+    /// A file that can be used to make use of WASM exports, if any, from the module
+    ///
+    /// If no wasm exports are made, then this file is not included in the build
+    exportFile: String?
+}
+
+class SpurteDartBuildOptions extends SpurteBuildOptions {
     /// Whether to bundle the project with JS
     /// 
     /// Defaults to `true`
     bundleAsJs: Boolean?
 }
 
-class DyteDartExperimentalOptions extends DyteExperimentalOptions {
+class SpurteDartExperimentalOptions extends SpurteExperimentalOptions {
     /// Whether to add types to the bundled JS files
     /// 
     /// This option defaults to `false`, but if `bundleAsJs` is provided as `false`, this option is ignored.
     /// 
     /// > **NOTE**: This option is experimental, and doesn't work at the moment
     bundleWithTypes: Boolean?
+
+    /// WASM options
+    ///
+    /// As of currently, these options only apply to Dart builds.
+    /// For more information on how to use wasm with dart, see https://dart.dev/web/wasm and https://chromium.googlesource.com/external/github.com/dart-lang/sdk/+/refs/tags/3.5.0-90.0.dev/pkg/dart2wasm/
+    wasm: SpurteDartWasmOptions?
 }
 
-class DyteJSDartOptions extends DyteJSSharedOptions {
+class SpurteJSDartOptions extends SpurteJSSharedOptions {
     /// Whether typescript is being used in this project
     typescript: Boolean?
 
@@ -49,17 +68,17 @@ entry: String? = "web/main.dart"
 pubspec: String?
 
 
-build: DyteDartBuildOptions? = new DyteDartBuildOptions {
+build: SpurteDartBuildOptions? = new SpurteDartBuildOptions {
     outdir = "dist"
     minify = true
     bundleAsJs = true
 }
 
 
-experimental: DyteDartExperimentalOptions = new DyteDartExperimentalOptions {
+experimental: SpurteDartExperimentalOptions = new SpurteDartExperimentalOptions {
     bundleWithTypes = false
 }
 
 
-/// Options used for configuring the use of JavaScript projects and dependencies in the Dyte Project
-js: DyteJSDartOptions?
+/// Options used for configuring the use of JavaScript projects and dependencies in the Spurte Project
+js: SpurteJSDartOptions?

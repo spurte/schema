@@ -1,17 +1,17 @@
-// Copyright (C) 2024 - The Dyte Authors
+// Copyright (C) 2024 - The Spurte Authors
 // 
 // The code provided, as well as usage of this code is licensed under the MIT License
 //
-// For more information, check the LICENSE file at the root of this project, or check https://github.com/nikeokoronkwo/dyte for more information
+// For more information, check the LICENSE file at the root of this project, or check https://github.com/nikeokoronkwo/spurte for more information
 
-/// The Common Dyte Options, shared between both the JavaScript/TypeScript (Deno) and the Dart implementation of Dyte.
-open module DyteCommonOptions
+/// The Common Spurte Options, shared between both the JavaScript/TypeScript (Deno) and the Dart implementation of Spurte.
+open module SpurteCommonOptions
 
-typealias DyteMode = "development" | "production"
-typealias DyteLogLevel = "debug" | "info" | "warn" | "error" | "none"
+typealias SpurteMode = "development" | "production"
+typealias SpurteLogLevel = "debug" | "info" | "warn" | "error" | "none"
 typealias PackageManager = "npm" | "pnpm" | "yarn" | "bun"
 
-class DyteServerHttpsOptions {
+class SpurteServerHttpsOptions {
   /// The path to the https certificate used for creating the https server
   cert: String?
 
@@ -19,7 +19,7 @@ class DyteServerHttpsOptions {
   key: String?
 }
 
-class DyteDevOptions {
+class SpurteDevOptions {
   /// Whether to bundle external dependencies or import them as-is.
   /// 
   /// Defaults to true, meaning url dependencies are bundled.
@@ -31,7 +31,7 @@ class DyteDevOptions {
   fullReload: Boolean?
 }
 
-open class DyteBuildOptions {
+open class SpurteBuildOptions {
   /// The output directory for the build files
   /// 
   /// Defaults to the `dist/` directory
@@ -43,12 +43,12 @@ open class DyteBuildOptions {
   minify: Boolean?
 }
 
-open class DyteExperimentalOptions {}
+open class SpurteExperimentalOptions {}
 
-/// Shared options for using js or ts in Dyte
+/// Shared options for using js or ts in Spurte
 ///
 /// This class is not meant to be used in the common options, but to be implemented and used in the separate implementations
-open class DyteJSSharedOptions {
+open class SpurteJSSharedOptions {
   /// Whether to make use of a `node_modules` directory
   nodeModulesDir: Boolean?
 
@@ -61,13 +61,13 @@ open class DyteJSSharedOptions {
   packageManager: PackageManager?
 
   /// The CDN to use to cache NPM dependencies during development.
-  /// Defaults to undefined for Dyte's own NPM dependency management.
+  /// Defaults to undefined for Spurte's own NPM dependency management.
   ///
   /// if `nodeModulesDir` is true, this option is ignored
   cdn: String?(beginsWith("https"));
 }
 
-class DyteServerOptions {
+class SpurteServerOptions {
   /// The server port number. Defaults to 8000
   port: Int?(isBetween(0, 9999))
 
@@ -75,13 +75,13 @@ class DyteServerOptions {
   host: String?
 
   /// HTTPS information that, when provided, can be used for creating a https server
-  https: DyteServerHttpsOptions?
+  https: SpurteServerHttpsOptions?
 }
 
-/// The root of the dyte project. Defaults to the current working directory
+/// The root of the spurte project. Defaults to the current working directory
 root: String?
 
-/// The base url of the dyte project.
+/// The base url of the spurte project.
 base: String?(startsWith("/")) = "/"
 
 /// The public directory to use for serving public assets. Defaults to `public/`
@@ -91,31 +91,31 @@ publicDir: String?(endsWith("/")) = "public/"
 publicRoot: String?(startsWith("/")) = "/"
 
 /// Explicitly set the mode and overwrite the default mode or mode passed via the command line.
-mode: DyteMode?
+mode: SpurteMode?
 
 /// The list of plugins provided for this project, either as a file path or as a package uri
 plugins: Listing<String>?
 
 /// Development options, used for customizing development as well as for other dev options.
-dev: DyteDevOptions? = new DyteDevOptions {
+dev: SpurteDevOptions? = new SpurteDevOptions {
   bundleJSDeps = true
   fullReload = false
 }
 
 /// Options for customizing building the project
-build: DyteBuildOptions? = new DyteBuildOptions {
+build: SpurteBuildOptions? = new SpurteBuildOptions {
   outdir = "dist"
   minify = true
 }
 
-/// Configure the server options for Dyte's development server
-server: DyteServerOptions? = new DyteServerOptions {
+/// Configure the server options for Spurte's development server
+server: SpurteServerOptions? = new SpurteServerOptions {
   port = 8000
   host = "localhost"
 }
 
-/// The logging level for the dyte server
-logLevel: DyteLogLevel? = "none"
+/// The logging level for the spurte server
+logLevel: SpurteLogLevel? = "none"
 
 /// Whether hot module replacement is active on the given project
 ///
@@ -123,4 +123,4 @@ logLevel: DyteLogLevel? = "none"
 hmr: Boolean? = true
 
 /// Experimental options
-experimental: DyteExperimentalOptions?
+experimental: SpurteExperimentalOptions?

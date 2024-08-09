@@ -1,4 +1,4 @@
-# Tests for Dyte Schemas
+# Tests for Spurte Schemas
 
 - `basic` represents tests concerning implementing the schemas in pkl itself
 - `impl` represents tests concerning validating and implementing the schema in representable formats (such as json and yaml)
