@@ -13,6 +13,8 @@ extends "common.pkl"
 
 import "common.pkl"
 
+typealias SpurteDartBuildTarget = "js" | "wasm"
+
 class SpurteDartWasmOptions {
     /// The file that includes the import object
     ///
@@ -42,10 +44,16 @@ class SpurteDartExperimentalOptions extends SpurteExperimentalOptions {
     bundleWithTypes: Boolean?
 
     /// WASM options
+    /// 
+    /// These options are only used when the build target at `experimental.target` is set to "wasm"
     ///
     /// As of currently, these options only apply to Dart builds.
+    /// 
     /// For more information on how to use wasm with dart, see https://dart.dev/web/wasm and https://chromium.googlesource.com/external/github.com/dart-lang/sdk/+/refs/tags/3.5.0-90.0.dev/pkg/dart2wasm/
     wasm: SpurteDartWasmOptions?
+
+    /// The build target for the given project - "js" or "wasm"
+    target: SpurteDartBuildTarget?
 }
 
 class SpurteJSDartOptions extends SpurteJSSharedOptions {
@@ -67,16 +75,17 @@ entry: String? = "web/main.dart"
 /// The path to the pubspec file used for dart configuration. Defaults to the project root
 pubspec: String?
 
-
+/// Options for customizing building the project
 build: SpurteDartBuildOptions? = new SpurteDartBuildOptions {
     outdir = "dist"
     minify = true
     bundleAsJs = true
 }
 
-
+/// Experimental options for working with Spurte
 experimental: SpurteDartExperimentalOptions = new SpurteDartExperimentalOptions {
     bundleWithTypes = false
+    target = "js"
 }
 
 
