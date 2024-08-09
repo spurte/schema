@@ -45,7 +45,7 @@ jobs:
 
       - uses: denoland/setup-deno@v1
         with:
-          deno-version: v1.x
+          deno-version-file: .dvmrc
 
       # Runs a set of commands using the runners shell
       - name: Build schemas
