@@ -1,4 +1,4 @@
-open module DytePlugin
+open module SpurtePlugin
 
 /// The name of the given plugin
 name: String

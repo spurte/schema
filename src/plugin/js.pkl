@@ -1,4 +1,4 @@
-module DyteJSPlugin
+module SpurteJSPlugin
 
 extends "common.pkl"
 

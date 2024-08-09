@@ -12,7 +12,7 @@ console.log("Begin generating config...\n");
 for (const item of values) {
     for (const fmt of formats) {
         const args = commonargs.concat("-f", fmt, ...(item ? ["-p", `type=${item ?? "common"}`] : []), "-o", `schemas/${item ?? "common"}/openapi.${fmt}`);
-        console.log(`Producing openapi schema for dyte ${item ?? "common"} config - ${fmt} format`);
+        console.log(`Producing openapi schema for spurte ${item ?? "common"} config - ${fmt} format`);
         const { code, stdout, stderr } = await new Deno.Command(cmdname, { args }).output();
 
         if (code != 0) {

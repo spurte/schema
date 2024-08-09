@@ -1,4 +1,4 @@
-module DyteDartPlugin
+module SpurteDartPlugin
 
 extends "common.pkl"
 
