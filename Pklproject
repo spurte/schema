@@ -1,5 +1,8 @@
 amends "pkl:Project"
 
 package {
-    name = "dyte-config",
+    name = "spurte-config"
+    version = "0.0.1"
+    baseUri = "package://spurte.dev/spurte-config-pkl"
+    packageZipUrl = "https://spurte.dev/spurte-config-pkl/spurte-config-pkl@0.0.1.zip"
 }
