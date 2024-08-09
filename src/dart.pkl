@@ -13,6 +13,19 @@ extends "common.pkl"
 
 import "common.pkl"
 
+class SpurteDartWasmOptions {
+    /// The file that includes the import object
+    ///
+    /// The import object here should be provided as a default export from the given file.
+    /// Support for using dart to export such import object is not yet implemented
+    importFile: String?
+
+    /// A file that can be used to make use of WASM exports, if any, from the module
+    ///
+    /// If no wasm exports are made, then this file is not included in the build
+    exportFile: String?
+}
+
 class SpurteDartBuildOptions extends SpurteBuildOptions {
     /// Whether to bundle the project with JS
     /// 
@@ -27,6 +40,12 @@ class SpurteDartExperimentalOptions extends SpurteExperimentalOptions {
     /// 
     /// > **NOTE**: This option is experimental, and doesn't work at the moment
     bundleWithTypes: Boolean?
+
+    /// WASM options
+    ///
+    /// As of currently, these options only apply to Dart builds.
+    /// For more information on how to use wasm with dart, see https://dart.dev/web/wasm and https://chromium.googlesource.com/external/github.com/dart-lang/sdk/+/refs/tags/3.5.0-90.0.dev/pkg/dart2wasm/
+    wasm: SpurteDartWasmOptions?
 }
 
 class SpurteJSDartOptions extends SpurteJSSharedOptions {
