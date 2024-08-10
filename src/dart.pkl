@@ -83,7 +83,7 @@ build: SpurteDartBuildOptions? = new SpurteDartBuildOptions {
 }
 
 /// Experimental options for working with Spurte
-experimental: SpurteDartExperimentalOptions = new SpurteDartExperimentalOptions {
+experimental: SpurteDartExperimentalOptions? = new SpurteDartExperimentalOptions {
     bundleWithTypes = false
     target = "js"
 }
