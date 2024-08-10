@@ -67,8 +67,8 @@ open class SpurteJSSharedOptions {
   cdn: String?(beginsWith("https"));
 }
 
-class SpurteServerOptions {
-  /// The server port number. Defaults to 8000
+abstract class SpurteSharedServerOptions {
+  /// The server port number. Defaults to 8000 for development, and 3000 for production preview
   port: Int?(isBetween(0, 9999))
 
   /// The server hostname. Defaults to "localhost"
@@ -77,6 +77,10 @@ class SpurteServerOptions {
   /// HTTPS information that, when provided, can be used for creating a https server
   https: SpurteServerHttpsOptions?
 }
+
+class SpurteServerOptions extends SpurteSharedServerOptions {}
+
+class SpurteProdOptions extends SpurteSharedServerOptions {}
 
 /// The root of the spurte project. Defaults to the current working directory
 root: String?
@@ -111,6 +115,12 @@ build: SpurteBuildOptions? = new SpurteBuildOptions {
 /// Configure the server options for Spurte's development server
 server: SpurteServerOptions? = new SpurteServerOptions {
   port = 8000
+  host = "localhost"
+}
+
+/// Configure the options for running the spurte production file server for serving the production build.
+prod: SpurteProdOptions? = new SpurteProdOptions {
+  port = 3000
   host = "localhost"
 }
 
